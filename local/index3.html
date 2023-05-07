@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//     array.map(function(currentValue, index, array) {
+//   // code to manipulate current element
+//   return newValue;
+// })
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(function(num) {
+  return num * 2;
+});
+
+console.log(doubled); // [2, 4, 6, 8, 10]
+// array.filter(function(currentValue, index, array) {
+//   // code to test current element
+//   return true/false;
+// })
+const numbers1 = [1, 2, 3, 4, 5];
+const evens = numbers1.filter(function(num) {
+  return num % 2 !== 0;
+});
+
+console.log(evens); // [2, 4]
+
+
+</script>
+</html>

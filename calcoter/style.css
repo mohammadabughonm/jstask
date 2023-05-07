@@ -1,0 +1,77 @@
+/* CSS Reset & Global Styles */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans';
+}
+
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color:#a8bf7e;
+    transition: 0.8s all;
+}
+.container {
+    width: 320px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a0d0ea;
+
+}
+
+
+.top-buttons {
+    display: flex;
+    align-items: center;
+}
+input {
+    padding: 25px;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+    width: 60px;
+    background-color: #efefef;
+    border: none;
+    outline: none;
+    border-radius:5px;
+    margin: 0.2em;
+}
+#result{
+    width: 100%;
+    background-color: #f1fbeb;
+}
+    .first-row,
+    .second-row,
+    .third-row,
+    .fourth-row,
+    .fifth-row {
+    margin-bottom: 2px;
+}
+input[type="text"] {
+    background-color: rgb(47, 51, 50);
+    width: 222.5px;
+}
+
+input[type="button"]:hover {
+    color: #e8ea58;
+}
+#clear-button {
+    color: #fff;
+    background-color: rgb(255, 42, 42);
+}
+.theme-button {
+    all: unset;
+    cursor: pointer;
+}
+.color{
+    background-color: #efff93;
+}

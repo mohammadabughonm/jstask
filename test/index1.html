@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 20px;
+  font-size: 1.5rem;
+  font-family: 'Ubuntu';
+  width: 1500px;
+}
+
+form {
+  display: block;
+  margin: 20px auto;
+  width: 540px;
+}
+
+label {
+  width: 160px;
+  display: inline-block;
+}
+
+input {
+  padding: 0.5rem;
+  width: 300px;
+  border: 1px solid black;
+  font-size: 1.5rem;
+  border-radius: 10px;
+}
+
+br {
+  margin: 20px;
+}
+
+canvas {
+  /* background: lightgray; */
+}
+
+button {
+  margin: 2rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  background: black;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+<body>
+    <canvas id="canvas" width="810" height="400"></canvas>
+<form>
+  <label for="min-rad">Min. Radius</label>
+  <input type="number" name="min-rad" id="min-rad" min="4"></input>
+  <br>
+  <label for="max-rad">Max. Radius</label>
+  <input type="number" name="max-rad" id="max-rad" min="20"></input>
+  <br>
+  <button type="button" id="clear">Clear Canvas</button>
+</form>
+<script>
+    const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const minElem = document.querySelector("input#min-rad");
+const maxElem = document.querySelector("input#max-rad");
+const clearBtn = document.querySelector("button#clear");
+
+let min_radius = 10;
+let max_radius = 30;
+
+minElem.addEventListener("change", function (event) {
+  min_radius = parseInt(event.target.value);
+  localStorage.setItem("min-radius", min_radius);
+});
+
+maxElem.addEventListener("change", function (event) {
+  max_radius = parseInt(event.target.value);
+  localStorage.setItem("max-radius", max_radius);
+});
+
+clearBtn.addEventListener("click", function (event) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  let image_data = canvas.toDataURL();
+  localStorage.setItem("image-data", image_data);
+});
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  if (localStorage.getItem("image-data")) {
+    var img = new Image();
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+    };
+    img.src = localStorage.getItem("image-data");
+  }
+
+  if (localStorage.getItem("min-radius")) {
+    min_radius = parseInt(localStorage.getItem("min-radius"));
+  }
+
+  if (localStorage.getItem("max-radius")) {
+    max_radius = parseInt(localStorage.getItem("max-radius"));
+  }
+
+  minElem.value = min_radius;
+  maxElem.value = max_radius;
+});
+
+canvas.addEventListener("mousedown", function (event) {
+  const canvas_rect = event.target.getBoundingClientRect();
+  const pos_x = event.clientX - canvas_rect.left;
+  const pos_y = event.clientY - canvas_rect.top;
+
+  for (let i = 0; i < 10; i++) {
+    let radius =
+      min_radius + Math.floor(Math.random() * (max_radius - min_radius));
+    ctx.beginPath();
+    ctx.arc(pos_x, pos_y, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+  }
+
+  let image_data = canvas.toDataURL();
+  localStorage.setItem("image-data", image_data);
+});
+
+</script>
+</body>
+</html>

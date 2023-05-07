@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body.dark {
+        background-color: black;
+    }
+
+    body.bue {
+        background-color:rgb(92, 92, 234) ;
+    }
+
+    body.drk {
+        background-color: rgb(65, 65, 68);
+    }
+
+    body.light {
+        background-color: wheat;
+    }
+</style>
+
+<body>
+    <div id="modeSwitcher">
+        <input type="checkbox" class="checkbox" id="chk" />
+        <label class="label" for="chk">
+            <input type="checkbox" class="checkbox" id="blu" />
+            <input type="checkbox" class="checkbox" id="pur" />
+            <label class="label" for="chk">
+                <i class="fas fa-moon"></i>
+                <!-- <div class="ball"></div> -->
+            </label>
+        </label>
+    </div>
+
+    <script>
+        window.onload = function () {
+            if (localStorage.darkMode == "true") {
+                document.body.classList.toggle('dark');
+                document.getElementById("chk").checked = true;
+            } else {
+                document.body.classList.toggle('bue');
+            }
+
+            if (localStorage.color) {
+                document.body.classList.add(localStorage.color);
+                if (localStorage.color === "drk") {
+                    document.getElementById("blu").checked = true;
+                } else if (localStorage.color === "light") {
+                    document.getElementById("pur").checked = true;
+                }
+            }
+        };
+
+        document.getElementById("chk").addEventListener('change', () => {
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('bue');
+            localStorage.darkMode = (localStorage.darkMode == "true") ? "false" : "true";
+        });
+
+        document.getElementById("blu").addEventListener('change', () => {
+            if (document.getElementById("blu").checked) {
+                document.body.classList.remove('bue', 'light');
+                document.body.classList.add('drk');
+                localStorage.color = "drk";
+            } else {
+                document.body.classList.remove('drk');
+                if (localStorage.darkMode == "true") {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.add('bue');
+                }
+                localStorage.removeItem("color");
+            }
+        });
+
+        document.getElementById("pur").addEventListener('change', () => {
+            if (document.getElementById("pur").checked) {
+                document.body.classList.remove('bue', 'drk');
+                document.body.classList.add('light');
+                localStorage.color = "light";
+            } else {
+                document.body.classList.remove('light');
+                if (localStorage.darkMode == "true") {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.add('bue');
+                }
+                localStorage.removeItem("color");
+            }
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/3d0e11c16d.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
